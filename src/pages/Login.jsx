@@ -6,7 +6,7 @@ import auth from "../firebase/firebase.config";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
-  const { setUser, handleGooglrSignIn } = useContext(AuthContext);
+  const { setUser, handleGoogleSignIn } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +21,15 @@ const Login = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const googleSignIn = () => {
+    handleGoogleSignIn()
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -48,7 +57,7 @@ const Login = () => {
                 <div>
                   <a className="link link-hover">Forgot password?</a>
                 </div>
-                <button className="btn  ">
+                <button onClick={googleSignIn} className="btn  ">
                   <FcGoogle />o o g l e
                 </button>
                 <div>
