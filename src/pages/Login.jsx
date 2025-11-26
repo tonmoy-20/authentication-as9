@@ -32,13 +32,13 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
-        navigate(location.state);
+        navigate(location.state ? location.state : "/");
       })
       .catch((err) => console.log(err));
   };
 
   const handleForget = () => {
-    console.log(email);
+    navigate(`/forget/${email}`);
   };
 
   return (
