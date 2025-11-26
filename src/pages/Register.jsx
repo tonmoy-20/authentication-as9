@@ -4,7 +4,8 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import { FcGoogle } from "react-icons/fc";
-
+import toast, { Toaster } from "react-hot-toast";
+const notify = () => toast(" Successfully Registerd.");
 const Register = () => {
   const { registerWithEmailPassword, user, setUser, handleGoogleSignIn } =
     useContext(AuthContext);
@@ -104,12 +105,15 @@ const Register = () => {
                     Login
                   </Link>
                 </div>
-                <button className="btn btn-neutral mt-4">Register</button>
+                <button onClick={notify} className="btn btn-neutral mt-4">
+                  Register
+                </button>
               </form>
             </div>
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

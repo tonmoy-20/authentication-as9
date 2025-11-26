@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import auth from "../firebase/firebase.config";
 import { FcGoogle } from "react-icons/fc";
+import toast, { Toaster } from "react-hot-toast";
+const notify = () => toast("Logged In.");
 
 const Login = () => {
   const { setUser, handleGoogleSignIn } = useContext(AuthContext);
@@ -78,12 +80,15 @@ const Login = () => {
                     Register
                   </Link>
                 </div>
-                <button className="btn btn-neutral mt-4">Login</button>
+                <button onClick={notify} className="btn btn-neutral mt-4">
+                  Login
+                </button>
               </form>
             </div>
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };
