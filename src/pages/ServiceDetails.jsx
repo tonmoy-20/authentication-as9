@@ -4,31 +4,25 @@ import { useParams } from "react-router";
 const ServiceDetails = () => {
   const { id } = useParams();
   const [services, setServices] = useState([]);
-
-  const [serviceDetails, setServiceDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/services.json")
       .then((res) => res.json())
-      .then((data) => setServices(data))
+      .then((data) => {
+        setServices(data);
+        setLoading(false);
+      })
       .catch((err) => console.log(err));
   }, []);
 
   const findResult = services.find((service) => service.serviceId == id);
 
   console.log(findResult);
-  // {
-  //     "serviceId": 13,
-  //     "serviceName": "Winter Full Groom Package",
-  //     "providerName": "Prestige Groom House",
-  //     "providerEmail": "prestige@groomhouse.com",
-  //     "price": 40,
-  //     "rating": 4.9,
-  //     "slotsAvailable": 2,
-  //     "description": "Premium grooming including winter-safe shampoo, trimming & paw protection.",
-  //     "image": "https://i.ibb.co.com/KcjL4gNv/4.jpg",
-  //     "category": "Grooming"
-  //   }
+  if (loading) {
+    return <p>Loading.....</p>;
+  }
+
   return (
     <div className="flex flex-col items-center mt-5 mb-5 px-[145px]">
       {/* <img className="h-[400px] mt-5" alt="" /> */}
