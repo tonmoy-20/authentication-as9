@@ -7,6 +7,7 @@ import Register from "../pages/Register";
 import Profile from "../components/Profile";
 import PrivateRoute from "./PrivateRoute";
 import ServiceDetails from "../pages/ServiceDetails";
+import ForgetPass from "../pages/ForgetPass";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Register />,
+      },
+      {
+        path: "/forget/:email",
+        element: <ForgetPass />,
       },
       {
         path: "/details/:id",

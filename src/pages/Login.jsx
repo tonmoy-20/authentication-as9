@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import auth from "../firebase/firebase.config";
@@ -9,6 +9,8 @@ const Login = () => {
   const { setUser, handleGoogleSignIn } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -35,6 +37,10 @@ const Login = () => {
       .catch((err) => console.log(err));
   };
 
+  const handleForget = () => {
+    console.log(email);
+  };
+
   return (
     <div>
       <div className="hero bg-base-200 min-h-screen">
@@ -44,6 +50,7 @@ const Login = () => {
               <form onSubmit={handleSubmit} className="fieldset">
                 <label className="label">Email</label>
                 <input
+                  onChange={(e) => setEmail(e.target.value)}
                   name="email"
                   type="email"
                   className="input"
@@ -58,7 +65,9 @@ const Login = () => {
                   placeholder="Password"
                 />
                 <div>
-                  <a className="link link-hover">Forgot password?</a>
+                  <button onClick={handleForget} className="link link-hover">
+                    Forgot password?
+                  </button>
                 </div>
                 <button onClick={googleSignIn} className="btn  ">
                   <FcGoogle />o o g l e
