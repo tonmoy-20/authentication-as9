@@ -1,13 +1,14 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useContext } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import auth from "../firebase/firebase.config";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const { setUser, handleGoogleSignIn } = useContext(AuthContext);
-
+  const location = useLocation();
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -17,6 +18,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setUser(user);
+        navigate(location.state);
       })
       .catch((error) => {
         console.log(error);
@@ -28,6 +30,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        navigate(location.state);
       })
       .catch((err) => console.log(err));
   };

@@ -16,6 +16,18 @@ const Register = () => {
     const name = e.target.name.value;
     const photourl = e.target.photoUrl.value;
 
+    const uppercase = /[A-Z]/;
+    const lowercase = /[a-z]/;
+
+    if (pass.length < 6) {
+      return alert("less than 6 characters");
+    }
+    if (!uppercase.test(pass)) {
+      return alert("Need a UpperCase");
+    }
+    if (!lowercase.test(pass)) {
+      return alert("Need a Lower Case");
+    }
     registerWithEmailPassword(email, pass)
       .then((userCredential) => {
         updateProfile(auth.currentUser, {
@@ -80,9 +92,9 @@ const Register = () => {
                   className="input"
                   placeholder="Password"
                 />
-                <div>
+                {/* <div>
                   <a className="link link-hover">Forgot password?</a>
-                </div>
+                </div> */}
                 <button onClick={googleSignUp} className="btn  ">
                   <FcGoogle />o o g l e
                 </button>
