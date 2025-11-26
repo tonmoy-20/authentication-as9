@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
-
+import { motion } from "motion/react";
 const Services = () => {
   const [services, setServices] = useState([]);
   useEffect(() => {
@@ -14,7 +14,14 @@ const Services = () => {
     <div className="mt-5 mb-5 md:px-40 px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service) => (
-          <div className="card bg-base-100 w-full  shadow-sm">
+          <motion.div
+            initial={{ scale: 0.5 }}
+            animate={{
+              scale: 1,
+              transition: { duration: 1 },
+            }}
+            className="card bg-base-100 w-full  shadow-sm"
+          >
             <figure>
               <img
                 className="w-full h-[300px] object-cover"
@@ -34,7 +41,7 @@ const Services = () => {
                 </Link>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
